@@ -10,6 +10,18 @@
   location, glob loader, render(entry) API) work on 6.4.8 too.
 - Deployed to GitHub Pages at https://mrawley.github.io via
   GitHub Actions.
+- **Content populated (2026-07-06):** Home, About (bio + timeline +
+  honors + interests), and 4 project entries (Consumer REM,
+  Sub + Title, Digital Attach, Narada) all grounded in real Connect
+  history and interview inputs.
+- **De-terminal-ified (2026-07-06):** stripped the shell-prompt
+  aesthetic Megan felt was a "costume." Removed `$ whoami`, `$ cat`,
+  `$ ls`, `$ echo`, `$ cd`, `bash:` lines, and the macOS-style
+  window dots from the home hero. Replaced with uppercase mono
+  eyebrows (`.eyebrow` in global.css) above each page's h1.
+  Kept the `## `/`### ` markdown-prefix on h2/h3 headers because
+  Megan is a competent AI/markdown user and those read as
+  intentional formatting, not costume.
 
 ## Stack decisions
 
@@ -25,36 +37,37 @@
 - **Theme:** dark mode default, no toggle for v1.
 - **Accent color:** #40826D (viridian, playbook default).
 - **Blog section name:** "Writing".
-- **Hero tone:** hybrid (terminal aesthetic + conversational).
+- **Hero tone:** clean personal-brand aesthetic. Terminal costume
+  (shell prompts, mac window dots) was stripped 2026-07-06.
+  Markdown-style h2/h3 prefixes kept (Megan is an AI/markdown
+  native, they read as intentional).
 
 ## Site structure
 
-- `/` &mdash; Home. Terminal-aesthetic hero, brief intro, links
-  to other sections.
-- `/about/` &mdash; Bio, career timeline, honors, interests.
-  Placeholder content pending achievements inventory.
-- `/projects/` &mdash; Selected work (border-left accent) +
-  Personal projects grid. Empty by default; add markdown files
-  to `src/content/projects/`.
+- `/` &mdash; Home. Personal-brand hero with mono eyebrow, name
+  as h1, tagline, brief intro, layoff status, and CTA links.
+- `/about/` &mdash; Bio, career timeline (5 entries including all
+  3 Microsoft promotions), honors (6 items including US Patent
+  11,144,365), interests (professional + personal). Fully
+  populated.
+- `/projects/` &mdash; 4 selected work cards from
+  `src/content/projects/`.
 - `/writing/` &mdash; Blog. Empty by default; add markdown files
   to `src/content/writing/`.
-- `/404` &mdash; terminal-style not-found page.
+- `/404` &mdash; clean minimal not-found page.
 
 ## Remaining todos
 
-- [ ] **Populate About page** with real bio, timeline, honors,
-  interests. Blocked on Todo #2 (achievements inventory) in the
-  layoff transition plan.
-- [ ] **Add real projects** to `src/content/projects/*.md` from
-  Megan's approved career highlights.
+- [ ] **Review look and feel** with Megan; iterate colors, fonts,
+  spacing to match her voice further if needed.
 - [ ] **Optionally add one blog post** if there's a real Connect
   reflection worth publishing. Ask before publishing.
-- [ ] **Add favicon.svg** to `public/`.
-- [ ] **Add resume.pdf** to `public/` for the downloadable resume
-  link once the resume exists.
-- [ ] **Verify LinkedIn URL** in `src/components/Footer.astro`
-  (currently placeholder `/in/meganrawley/`). Correct if
-  different.
+- [ ] **Add favicon.svg** to `public/` (currently a placeholder
+  .ico works).
+- [ ] **Add resume.pdf** to `public/` once the resume exists
+  (blocked on Todo #3 of the layoff transition plan).
+- [ ] **Higher-fidelity content pass** across all pages once
+  achievements inventory is complete.
 
 ## Personal GitHub setup notes
 

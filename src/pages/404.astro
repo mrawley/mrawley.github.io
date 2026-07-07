@@ -4,16 +4,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout title="404 | page not found">
   <div class="not-found">
-    <p class="mono accent">$ cd /the-page-you-were-looking-for</p>
-    <p class="mono error">
-      bash: cd: /the-page-you-were-looking-for: No such file or directory
-    </p>
-    <h1>404: not found</h1>
+    <p class="eyebrow">404</p>
+    <h1>Page not found</h1>
     <p>
       This page doesn't exist. It may have moved, been renamed, or maybe it was never here at all.
     </p>
-    <p class="mono">
-      <a href="/">$ cd ~ &rarr;</a>
+    <p>
+      <a href="/">&larr; back home</a>
     </p>
   </div>
 </BaseLayout>
@@ -21,8 +18,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <style>
   .not-found {
     padding-top: var(--space-lg);
-  }
-  .error {
-    color: var(--terminal-red);
   }
 </style>

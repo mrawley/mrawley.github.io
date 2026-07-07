@@ -1,9 +1,75 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const timeline = [
+  {
+    year: 'Sep 2023 – 2026',
+    title: 'Senior Product Manager, Xbox Consumer Commerce Platform',
+    body: `Microsoft. Cross-cutting product ownership across Consumer REM (regulatory: FinCrime, Order-to-Cash, CSV Compliance), CSV / gift-card strategy, Sub + Title bundle capability, Narada email & notifications, Digital Attach, and Purchase Pod leadership. Promoted to Senior in September 2023 while on maternity leave.`,
+  },
+  {
+    year: 'Jun 2020 – Sep 2023',
+    title: 'Product Manager 2 (with in-band promotion in 2021)',
+    body: `Microsoft. Transitioned from program management into product management on the commerce platform, growing scope from single-capability ownership to cross-cutting programs.`,
+  },
+  {
+    year: 'Sep 2018 – Jun 2020',
+    title: 'Program Manager, Commerce Ecosystem',
+    body: `Microsoft. Owned the modernization of the transactional email system for the commercial commerce team: built a new service and drove the migration off Salesforce toward Azure Email Orchestrator, the internally-hosted platform that later became the Microsoft Email Orchestrator team.`,
+  },
+  {
+    year: '2014 – 2018',
+    title: 'Program Manager → Senior Program Manager, DatStat, Inc.',
+    body: `Acquired by SCI Solutions in April 2018. First program manager in the engineering department. Established agile engineering processes and introduced agile methodologies to the team. Led the creation of a new web-based product from the ground up to streamline the company's legacy offerings. Started as an intern in 2014 during university, became full-time Program Manager after graduation, promoted to Senior Program Manager in May 2017.`,
+  },
+  {
+    year: 'June 2015',
+    title: 'B.S. Informatics, University of Washington',
+    body: `Cum Laude, 3.65 GPA.`,
+  },
+];
+
+const honors = [
+  {
+    year: '2026',
+    title: 'GTA VI launch on Xbox via Sub + Title.',
+    body: `Launched GTA VI on Xbox using the Sub + Title bundle capability I originally built, bringing Xbox's offering to competitive parity with PlayStation and other platforms on that title.`,
+  },
+  {
+    year: '2025',
+    title: 'Xbox-branded ROG Ally devices.',
+    body: `Part of the broader team that shipped Microsoft's handheld gaming partnership with ASUS.`,
+  },
+  {
+    year: '2025',
+    title: 'Lotus / Xbox Game Pass tier restructure.',
+    body: `Part of the broader team that shipped the Xbox Game Pass subscription pricing and tier changes.`,
+  },
+  {
+    year: '2023',
+    title: 'Promoted to Senior Product Manager, Microsoft.',
+    body: `Third promotion at Microsoft (Program Manager → PM2 in June 2020 → in-band promotion in 2021 → Senior in September 2023). Promotion came through while on maternity leave.`,
+  },
+  {
+    year: '2021',
+    title: 'Named inventor on U.S. Patent 11,144,365.',
+    body: `"Automatic Clustering of Users for Enabling Viral Adoption of Applications Hosted by Multi-Tenant Systems" (USPTO application 16/888,645, filed May 29, 2020). Co-inventors: Ariel Gordon and Balu Chenicheri. Rare for a PM discipline.`,
+  },
+  {
+    year: '2017',
+    title: 'Promoted to Senior Program Manager, DatStat, Inc.',
+    body: `Promoted from Program Manager after establishing agile engineering practices and leading the ground-up build of a new web product to streamline the company's legacy offerings.`,
+  },
+  {
+    year: '2015',
+    title: 'Cum Laude, B.S. Informatics, University of Washington.',
+    body: `3.65 GPA, June 2015.`,
+  },
+];
 ---
 
 <BaseLayout title="About | Megan Lange">
-  <p class="mono accent">$ cat about.md</p>
+  <p class="eyebrow">About</p>
   <h1>About</h1>
 
   <h2>Bio</h2>
@@ -41,168 +107,158 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </p>
 
   <h2>Timeline</h2>
-  <ul class="timeline">
-    <li>
-      <span class="mono dim">Sep 2023 &ndash; 2026</span>
-      <span>
-        <strong>Senior Product Manager, Xbox Consumer Commerce Platform</strong> at
-        Microsoft. Cross-cutting product ownership across Consumer REM (regulatory: FinCrime,
-        Order-to-Cash, CSV Compliance), CSV / gift-card strategy, Sub + Title bundle capability,
-        Narada email &amp; notifications, Digital Attach, and Purchase Pod leadership. Promoted
-        to Senior in September 2023 while on maternity leave.
-      </span>
-    </li>
-    <li>
-      <span class="mono dim">Jun 2020 &ndash; Sep 2023</span>
-      <span>
-        <strong>Product Manager 2 (with in-band promotion in 2021)</strong> at Microsoft.
-        Transitioned from program management into product management on the commerce platform,
-        growing scope from single-capability ownership to cross-cutting programs.
-      </span>
-    </li>
-    <li>
-      <span class="mono dim">Sep 2018 &ndash; Jun 2020</span>
-      <span>
-        <strong>Program Manager, Commerce Ecosystem</strong> at Microsoft. Owned the
-        modernization of the transactional email system for the commercial commerce team:
-        built a new service and drove the migration off Salesforce toward Azure Email
-        Orchestrator, the internally-hosted platform that later became the Microsoft Email
-        Orchestrator team.
-      </span>
-    </li>
-    <li>
-      <span class="mono dim">2014 &ndash; 2018</span>
-      <span>
-        <strong>Program Manager &rarr; Senior Program Manager, DatStat, Inc.</strong>
-        (acquired by SCI Solutions in April 2018). First program manager in the engineering
-        department. Established agile engineering processes and introduced agile methodologies to
-        the team. Led the creation of a new web-based product from the ground up to streamline the
-        company's legacy offerings. Started as an intern in 2014 during university, became
-        full-time Program Manager after graduation, promoted to Senior Program Manager in
-        May 2017.
-      </span>
-    </li>
-    <li>
-      <span class="mono dim">June 2015</span>
-      <span>
-        <strong>B.S. Informatics, University of Washington</strong>. Cum Laude, 3.65 GPA.
-      </span>
-    </li>
-  </ul>
+  <ol class="timeline">
+    {timeline.map((t) => (
+      <li>
+        <div class="year mono">{t.year}</div>
+        <strong class="title">{t.title}</strong>
+        <p class="dim">{t.body}</p>
+      </li>
+    ))}
+  </ol>
 
   <h2>Honors</h2>
-  <ul class="honors">
-    <li>
-      <strong>Named inventor on U.S. Patent 11,144,365</strong>
-      <span class="mono dim">(2021, filed May 29, 2020)</span>
-      <p>
-        "Automatic Clustering of Users for Enabling Viral Adoption of Applications Hosted by
-        Multi-Tenant Systems" (USPTO application 16/888,645). Co-inventors: Ariel Gordon and
-        Balu Chenicheri. Rare for a PM discipline.
-      </p>
-    </li>
-    <li>
-      <strong>Shipping team on Xbox-branded ROG Ally devices</strong>
-      <span class="mono dim">(2025)</span>
-      <p>Part of the broader team that shipped Microsoft's handheld gaming partnership with ASUS.</p>
-    </li>
-    <li>
-      <strong>Shipping team on Lotus (Xbox Game Pass tier restructure)</strong>
-      <span class="mono dim">(2025)</span>
-      <p>
-        Part of the broader team that shipped the Xbox Game Pass subscription pricing and tier
-        changes.
-      </p>
-    </li>
-    <li>
-      <strong>GTA VI launch on Xbox via Sub + Title</strong>
-      <span class="mono dim">(2026)</span>
-      <p>
-        Launched GTA VI on Xbox using the Sub + Title bundle capability I originally built,
-        bringing Xbox's offering to competitive parity with PlayStation and other platforms on
-        that title.
-      </p>
-    </li>
-    <li>
-      <strong>Promoted to Senior Product Manager, Microsoft</strong>
-      <span class="mono dim">(September 2023)</span>
-      <p>
-        Third promotion at Microsoft (Program Manager &rarr; PM2 in June 2020 &rarr; in-band
-        promotion in 2021 &rarr; Senior in September 2023). Promotion came through while I was
-        on maternity leave.
-      </p>
-    </li>
-    <li>
-      <strong>Senior Program Manager promotion, DatStat, Inc.</strong>
-      <span class="mono dim">(May 2017)</span>
-      <p>
-        Promoted from Program Manager after establishing agile engineering practices and leading
-        the ground-up build of a new web product to streamline the company's legacy offerings.
-      </p>
-    </li>
-    <li>
-      <strong>Cum Laude, B.S. Informatics, University of Washington</strong>
-      <span class="mono dim">(June 2015, 3.65 GPA)</span>
-    </li>
-  </ul>
+  <dl class="honors">
+    {honors.map((h) => (
+      <>
+        <dt class="mono">{h.year}</dt>
+        <dd>
+          <strong>{h.title}</strong> {h.body}
+        </dd>
+      </>
+    ))}
+  </dl>
 
   <h2>Interests</h2>
-  <h3>Professionally</h3>
-  <p>
-    Gaming as an industry. The hard problems that come with working on platforms, not just
-    services. AI tooling and skilling. Mostly, I love PMing: I love shipping, and I love
-    bringing the people around me along for the ride.
-  </p>
-  <h3>Personally</h3>
-  <p>
-    Gaming. TV. Knitting, pottery, painting, and currently learning to sew. I also suffer from
-    unwarranted confidence that I can absolutely install my own floors or build my own patio.
-    Camping and snowboarding. And learning ASL and about Deaf community and culture, since
-    my son is deaf.
-  </p>
+  <div class="interests">
+    <div class="interest-card">
+      <div class="ic-header">Professionally</div>
+      <ul>
+        <li>Gaming as an industry</li>
+        <li>Hard problems in platforms, not just services</li>
+        <li>AI tooling and skilling</li>
+        <li>Shipping and bringing people along</li>
+      </ul>
+    </div>
+    <div class="interest-card">
+      <div class="ic-header">Personally</div>
+      <ul>
+        <li>Gaming &middot; TV</li>
+        <li>Knitting &middot; pottery &middot; painting &middot; sewing</li>
+        <li>Camping &middot; snowboarding</li>
+        <li>DIY: floors, patios, whatever</li>
+        <li>ASL &amp; Deaf community (my son is deaf)</li>
+      </ul>
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
-  ul.timeline {
+  /* Timeline: variant G (thin rail with ring dots, year as small-caps eyebrow) */
+  ol.timeline {
     list-style: none;
     padding: 0;
     margin: 0;
+    position: relative;
   }
-  ul.timeline li {
-    padding: var(--space-md) 0;
-    display: flex;
-    gap: var(--space-md);
-    flex-wrap: wrap;
+  ol.timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: var(--border);
+  }
+  ol.timeline li {
+    position: relative;
+    padding: var(--space-md) 0 var(--space-md) var(--space-lg);
+  }
+  ol.timeline li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 22px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 3px solid var(--accent);
+  }
+  ol.timeline .year {
+    color: var(--accent);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.2rem;
+    white-space: nowrap;
+  }
+  ol.timeline .title {
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+  ol.timeline p {
+    margin: 0;
+  }
+
+  /* Honors: variant C (two-column dl, year | title + body) */
+  dl.honors {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: var(--space-md) var(--space-lg);
+    margin: 0;
+  }
+  dl.honors dt {
+    color: var(--accent);
+    padding-top: 0.15rem;
+    text-align: right;
+    white-space: nowrap;
+  }
+  dl.honors dd {
+    margin: 0;
+    padding-bottom: var(--space-md);
     border-bottom: 1px solid var(--border);
   }
-  ul.timeline li:last-child {
+  dl.honors dd:last-of-type {
     border-bottom: 0;
   }
-  ul.timeline .mono {
-    min-width: 120px;
-    padding-top: 0.2rem;
-  }
-  ul.timeline strong {
+  dl.honors strong {
     color: var(--text-primary);
   }
 
-  ul.honors {
-    list-style: none;
-    padding: 0;
+  /* Interests: variant C (split cards side by side with bullet lists) */
+  .interests {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+  @media (max-width: 640px) {
+    .interests {
+      grid-template-columns: 1fr;
+    }
+  }
+  .interest-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+  }
+  .ic-header {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-md);
+  }
+  .interest-card ul {
+    padding-left: 1.1rem;
     margin: 0;
   }
-  ul.honors > li {
-    padding: var(--space-md) 0;
-    border-bottom: 1px solid var(--border);
-  }
-  ul.honors > li:last-child {
-    border-bottom: 0;
-  }
-  ul.honors strong {
-    color: var(--text-primary);
-    margin-right: var(--space-sm);
-  }
-  ul.honors p {
-    margin: var(--space-sm) 0 0;
+  .interest-card li {
+    margin-bottom: 0.4rem;
+    color: var(--text-secondary);
   }
 </style>

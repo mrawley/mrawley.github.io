@@ -4,29 +4,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout title="Megan Lange">
   <section class="hero">
-    <div class="terminal-window" aria-hidden="true">
-      <div class="dots">
-        <span class="dot red"></span>
-        <span class="dot yellow"></span>
-        <span class="dot green"></span>
-      </div>
-    </div>
-    <p class="mono accent">$ whoami</p>
-    <h1>Megan Lange</h1>
-    <p class="tagline mono dim">senior product manager · consumer commerce · gaming platforms</p>
+    <p class="eyebrow">Megan Lange</p>
+    <h1>Product manager. Platform builder. Compulsive shipper.</h1>
+    <p class="tagline">Senior product manager &middot; consumer commerce &middot; gaming platforms</p>
     <p>
-      Senior product manager most recently at Microsoft, on the Xbox Consumer Commerce Platform
-      team. My work has centered on cross-cutting capabilities in the commerce lifecycle:
-      subscription lifecycle, regulatory compliance, retail federation, and the systems that keep
-      them running at scale.
+      Most recently at Microsoft on the Xbox Consumer Commerce Platform team. My work has
+      centered on cross-cutting capabilities in the commerce lifecycle: subscription lifecycle,
+      regulatory compliance, retail federation, and the systems that keep them running at scale.
     </p>
     <p>
       Recent focus areas: Consumer REM (a regulatory program spanning financial crime,
-      order-to-cash, and stored-value compliance), CSV/gift-card product ownership, and the
+      order-to-cash, and stored-value compliance), CSV / gift-card product ownership, and the
       Sub + Title bundle capability now in multi-publisher adoption (Bethesda in testing,
       Rockstar GTA VI configuration underway).
     </p>
-    <p class="mono dim">$ status: recently impacted by layoff (July 2026), exploring what's next.</p>
+    <p class="dim">
+      Recently impacted by the July 2026 Microsoft layoff and exploring what's next.
+    </p>
     <nav class="cta">
       <a href="/about/">about &rarr;</a>
       <a href="/projects/">projects &rarr;</a>
@@ -39,36 +33,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .hero {
     padding-top: var(--space-lg);
   }
-  .terminal-window {
-    margin-bottom: var(--space-lg);
-    display: inline-block;
-    padding: 6px 10px;
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-  }
-  .dots {
-    display: flex;
-    gap: 6px;
-  }
-  .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: block;
-  }
-  .dot.red {
-    background: var(--terminal-red);
-  }
-  .dot.yellow {
-    background: var(--terminal-yellow);
-  }
-  .dot.green {
-    background: var(--terminal-green);
-  }
   .tagline {
     margin-top: -0.5rem;
     margin-bottom: var(--space-lg);
+    color: var(--text-secondary);
+    font-size: 1.05rem;
   }
   .cta {
     display: flex;
@@ -77,7 +46,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-top: var(--space-xl);
   }
   .cta a {
-    font-family: var(--font-mono);
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 </style>

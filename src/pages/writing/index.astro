@@ -9,12 +9,12 @@ allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <BaseLayout title="Writing | Megan Lange">
-  <p class="mono accent">$ ls writing/</p>
+  <p class="eyebrow">Writing</p>
   <h1>Writing</h1>
 
   {
     allPosts.length === 0 ? (
-      <p class="dim mono">$ echo "no posts published yet, check back soon."</p>
+      <p class="dim">No posts published yet, check back soon.</p>
     ) : (
       <ul class="posts">
         {allPosts.map((post) => (

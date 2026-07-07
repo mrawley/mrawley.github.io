@@ -2,131 +2,113 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const allProjects = await getCollection('projects');
-const workProjects = allProjects
-  .filter((p) => p.data.type === 'work')
-  .sort((a, b) => a.data.order - b.data.order);
-const personalProjects = allProjects
-  .filter((p) => p.data.type === 'personal')
+const projects = (await getCollection('projects'))
   .sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout title="Projects | Megan Lange">
-  <p class="mono accent">$ ls -la projects/</p>
+  <p class="eyebrow">Projects</p>
   <h1>Projects</h1>
 
-  {
-    workProjects.length > 0 && (
-      <>
-        <h2>Selected work</h2>
-        <ul class="work-grid">
-          {workProjects.map((project) => (
-            <li class="card work-card">
-              <h3>
-                {project.data.link ? (
-                  <a href={project.data.link} target="_blank" rel="noopener">
-                    {project.data.title}
-                  </a>
-                ) : (
-                  project.data.title
-                )}
-              </h3>
-              <p class="meta mono dim">
-                {project.data.year}
-                {project.data.role ? ` \u00b7 ${project.data.role}` : ''}
-              </p>
-              <p>{project.data.description}</p>
-              {project.data.stack && project.data.stack.length > 0 && (
-                <p class="stack mono dim">{project.data.stack.join(' \u00b7 ')}</p>
-              )}
-            </li>
-          ))}
-        </ul>
-      </>
-    )
-  }
-
-  {
-    personalProjects.length > 0 && (
-      <>
-        <h2>Personal projects</h2>
-        <ul class="personal-grid">
-          {personalProjects.map((project) => (
-            <li class="card">
-              <h3>
-                {project.data.link ? (
-                  <a href={project.data.link} target="_blank" rel="noopener">
-                    {project.data.title}
-                  </a>
-                ) : (
-                  project.data.title
-                )}
-              </h3>
-              <p class="meta mono dim">{project.data.year}</p>
-              <p>{project.data.description}</p>
-              {project.data.stack && project.data.stack.length > 0 && (
-                <p class="stack mono dim">{project.data.stack.join(' \u00b7 ')}</p>
-              )}
-            </li>
-          ))}
-        </ul>
-      </>
-    )
-  }
-
-  {
-    allProjects.length === 0 && (
-      <p class="dim mono">$ echo "no projects published yet, check back soon."</p>
-    )
-  }
+  {projects.length === 0 ? (
+    <p class="dim">No projects published yet, check back soon.</p>
+  ) : (
+    <ul class="bento">
+      {projects.map((p, i) => (
+        <li class={(i === 0 || i === projects.length - 1) && projects.length >= 4 ? 'wide' : ''}>
+          <div class="year mono">{p.data.year}</div>
+          <h3>{p.data.title}</h3>
+          {p.data.role && <span class="role">{p.data.role}</span>}
+          <p>{p.data.description}</p>
+          {p.data.stack && p.data.stack.length > 0 && (
+            <ul class="tags">
+              {p.data.stack.map((s) => <li>{s}</li>)}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  )}
 </BaseLayout>
 
 <style>
-  ul {
+  /* Projects: variant J (bento asymmetric grid) */
+  .bento {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
   }
-  .card {
+  .bento > li {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: var(--space-lg);
-    transition:
-      transform 0.15s ease,
-      box-shadow 0.15s ease,
-      border-color 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
   }
-  .card:hover {
-    transform: translateY(-2px);
+  .bento > li:hover {
     border-color: var(--accent);
-    box-shadow: 0 8px 20px var(--accent-glow);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--accent-glow);
   }
-  .work-card {
+  .bento > li.wide {
+    grid-column: 1 / -1;
     border-left: 3px solid var(--accent);
   }
-  .work-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
+  .bento .year {
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
-  .personal-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: var(--space-md);
+  .bento h3 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 1.15rem;
   }
-  .meta {
-    margin: 0.25rem 0;
-    font-size: 0.85rem;
+  .bento h3::before {
+    content: '';
   }
-  .stack {
-    font-size: 0.8rem;
-    margin-top: var(--space-sm);
+  .bento .role {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
-  h3 {
-    margin-top: 0;
+  .bento p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
   }
-  h3::before {
-    content: none;
+  .bento .tags {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-sm) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .bento .tags li {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    background: var(--accent-glow);
+    border-radius: 4px;
+    padding: 0.3rem 0.6rem;
+    line-height: 1;
+  }
+  @media (max-width: 640px) {
+    .bento {
+      grid-template-columns: 1fr;
+    }
+    .bento > li.wide {
+      grid-column: 1;
+    }
   }
 </style>
