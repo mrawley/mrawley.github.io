@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About &mdash; Megan Rawley">
+  <p class="mono accent">$ cat about.md</p>
+  <h1>About</h1>
+
+  <h2>Bio</h2>
+  <p class="dim">
+    [placeholder bio. content will be populated from Connect exports and resume during the
+    achievements inventory phase.]
+  </p>
+
+  <h2>Timeline</h2>
+  <ul class="timeline">
+    <li>
+      <span class="mono dim">2020 - 2026</span>
+      <span>Senior Product Manager, Xbox Consumer Commerce Platform &mdash; Microsoft</span>
+    </li>
+    <li class="dim">
+      <span class="mono">[NEEDS INPUT: prior roles from resume]</span>
+    </li>
+  </ul>
+
+  <h2>Honors</h2>
+  <ul>
+    <li class="dim mono">[NEEDS INPUT: awards, promotions, recognition]</li>
+  </ul>
+
+  <h2>Interests</h2>
+  <p class="dim mono">[NEEDS INPUT: professional and personal interests]</p>
+</BaseLayout>
+
+<style>
+  ul.timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.timeline li {
+    padding: var(--space-sm) 0;
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+  }
+  ul.timeline li:last-child {
+    border-bottom: 0;
+  }
+  ul.timeline .mono {
+    min-width: 120px;
+  }
+</style>

@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const workProjects = allProjects
+  .filter((p) => p.data.type === 'work')
+  .sort((a, b) => a.data.order - b.data.order);
+const personalProjects = allProjects
+  .filter((p) => p.data.type === 'personal')
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Projects &mdash; Megan Rawley">
+  <p class="mono accent">$ ls -la projects/</p>
+  <h1>Projects</h1>
+
+  {
+    workProjects.length > 0 && (
+      <>
+        <h2>Selected work</h2>
+        <ul class="work-grid">
+          {workProjects.map((project) => (
+            <li class="card work-card">
+              <h3>
+                {project.data.link ? (
+                  <a href={project.data.link} target="_blank" rel="noopener">
+                    {project.data.title}
+                  </a>
+                ) : (
+                  project.data.title
+                )}
+              </h3>
+              <p class="meta mono dim">
+                {project.data.year}
+                {project.data.role ? ` \u00b7 ${project.data.role}` : ''}
+              </p>
+              <p>{project.data.description}</p>
+              {project.data.stack && project.data.stack.length > 0 && (
+                <p class="stack mono dim">{project.data.stack.join(' \u00b7 ')}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  {
+    personalProjects.length > 0 && (
+      <>
+        <h2>Personal projects</h2>
+        <ul class="personal-grid">
+          {personalProjects.map((project) => (
+            <li class="card">
+              <h3>
+                {project.data.link ? (
+                  <a href={project.data.link} target="_blank" rel="noopener">
+                    {project.data.title}
+                  </a>
+                ) : (
+                  project.data.title
+                )}
+              </h3>
+              <p class="meta mono dim">{project.data.year}</p>
+              <p>{project.data.description}</p>
+              {project.data.stack && project.data.stack.length > 0 && (
+                <p class="stack mono dim">{project.data.stack.join(' \u00b7 ')}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  {
+    allProjects.length === 0 && (
+      <p class="dim mono">$ echo "no projects published yet, check back soon."</p>
+    )
+  }
+</BaseLayout>
+
+<style>
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      border-color 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 20px var(--accent-glow);
+  }
+  .work-card {
+    border-left: 3px solid var(--accent);
+  }
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .personal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-md);
+  }
+  .meta {
+    margin: 0.25rem 0;
+    font-size: 0.85rem;
+  }
+  .stack {
+    font-size: 0.8rem;
+    margin-top: var(--space-sm);
+  }
+  h3 {
+    margin-top: 0;
+  }
+  h3::before {
+    content: none;
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+const email = 'meganmrawley@gmail.com';
+const github = 'https://github.com/mrawley';
+const linkedin = 'https://www.linkedin.com/in/meganrawley/';
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="mono dim">$ get in touch</p>
+    <ul>
+      <li><a href={`mailto:${email}`}>{email}</a></li>
+      <li><a href={github} target="_blank" rel="noopener">github/mrawley</a></li>
+      <li><a href={linkedin} target="_blank" rel="noopener">linkedin</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-2xl);
+    padding: var(--space-xl) var(--space-md);
+  }
+  .footer-inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    list-style: none;
+    margin: var(--space-sm) 0 0;
+    padding: 0;
+  }
+  a {
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    border-bottom: 1px solid transparent;
+  }
+  a:hover,
+  a:focus-visible {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+</style>

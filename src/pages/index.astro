@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Megan Rawley">
+  <section class="hero">
+    <div class="terminal-window" aria-hidden="true">
+      <div class="dots">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+    </div>
+    <p class="mono accent">$ whoami</p>
+    <h1>Megan Rawley</h1>
+    <p class="tagline mono dim">senior product manager · consumer commerce · gaming platforms</p>
+    <p>
+      Product manager with a decade plus building consumer commerce platforms. Subscription lifecycle,
+      payments, retail federation, and the messy human systems that make them all work. Most recently
+      at Microsoft on the Xbox Consumer Commerce Platform team, shipping cross-cutting capabilities
+      that power over $21B in annual consumer revenue.
+    </p>
+    <p class="mono dim">$ status: recently impacted by layoff, exploring what's next.</p>
+    <nav class="cta">
+      <a href="/about/">about &rarr;</a>
+      <a href="/projects/">projects &rarr;</a>
+      <a href="/writing/">writing &rarr;</a>
+    </nav>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-top: var(--space-lg);
+  }
+  .terminal-window {
+    margin-bottom: var(--space-lg);
+    display: inline-block;
+    padding: 6px 10px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .dots {
+    display: flex;
+    gap: 6px;
+  }
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+  }
+  .dot.red {
+    background: var(--terminal-red);
+  }
+  .dot.yellow {
+    background: var(--terminal-yellow);
+  }
+  .dot.green {
+    background: var(--terminal-green);
+  }
+  .tagline {
+    margin-top: -0.5rem;
+    margin-bottom: var(--space-lg);
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+  .cta a {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+  }
+</style>

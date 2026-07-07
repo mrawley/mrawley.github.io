@@ -1,0 +1,97 @@
+---
+const currentPath = Astro.url.pathname;
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/about/', label: 'About' },
+  { href: '/projects/', label: 'Projects' },
+  { href: '/writing/', label: 'Writing' },
+];
+
+function isActive(href: string): boolean {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="brand mono">$ mrawley</a>
+    <ul>
+      {nav.map((item) => (
+        <li>
+          <a href={item.href} class={isActive(item.href) ? 'active' : ''}>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: var(--wide-max);
+    margin: 0 auto;
+    padding: var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-bottom: 0;
+  }
+  .brand:hover {
+    color: var(--accent-hover);
+    border-bottom: 0;
+  }
+  ul {
+    display: flex;
+    gap: var(--space-lg);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+  a {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    position: relative;
+    border-bottom: 0;
+    padding-bottom: 4px;
+  }
+  a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 0;
+    background: var(--accent);
+    transition: width 0.2s ease;
+  }
+  a:hover,
+  a:focus-visible,
+  a.active {
+    color: var(--text-primary);
+    border-bottom: 0;
+  }
+  a:hover::after,
+  a:focus-visible::after,
+  a.active::after {
+    width: 100%;
+  }
+</style>
