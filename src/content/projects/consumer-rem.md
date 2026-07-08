@@ -9,7 +9,7 @@ stack:
   - "Cross-team facilitation"
   - "Requirements engineering"
 featured: true
-order: 1
+order: 2
 type: "work"
 ---
 
