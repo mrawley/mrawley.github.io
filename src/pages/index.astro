@@ -1,57 +1,155 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import portrait from '../assets/megan.jpeg';
 ---
 
 <BaseLayout title="Megan Lange">
   <section class="hero">
-    <p class="eyebrow">Megan Lange</p>
-    <h1>Product manager. Platform builder. Compulsive shipper.</h1>
-    <p class="tagline">Senior product manager &middot; consumer commerce &middot; gaming platforms</p>
+    <div class="hero-top">
+      <div class="hero-id">
+        <h1 class="name">Megan <span class="surname">Lange</span></h1>
+        <p class="lede">Product manager. Platform builder. Compulsive shipper.</p>
+        <p class="tagline">senior product leader &middot; commerce platforms &middot; subscriptions &middot; gaming &middot; AI tooling</p>
+      </div>
+      <Image
+        class="portrait"
+        src={portrait}
+        alt="Megan Lange"
+        width={440}
+        densities={[1, 2]}
+        loading="eager"
+      />
+    </div>
+
     <p>
-      Most recently at Microsoft on the Xbox Consumer Commerce Platform team. My work has
-      centered on cross-cutting capabilities in the commerce lifecycle: subscription lifecycle,
-      regulatory compliance, retail federation, and the systems that keep them running at scale.
+      12+ years building commerce platform capabilities and experiences across Xbox, Microsoft
+      365, and Windows devices &mdash; spanning core purchase, checkout, subscriptions, partner
+      channels, and regulated payments.
     </p>
     <p>
-      Recent highlight: I built the Sub + Title subscription-bundle platform capability that
-      powered a AAA publisher's global pre-order launch (Rockstar's GTA VI) &mdash; a rolling
-      release across 20+ countries that landed with zero platform-tracked issues. Other recent
-      focus areas: Consumer REM (a regulatory program spanning financial crime, order-to-cash,
-      and stored-value compliance), CSV / gift-card product ownership, OEM Digital Attach, and
-      the transactional-email infrastructure behind Xbox, Store, and Office.
+      I took a device-bundling program its biggest OEMs had written off and grew it into a $98M
+      business and a strategic consumer platform capability. I delivered the platform side of
+      Rockstar&rsquo;s GTA VI pre-order launch across 20+ countries. And most recently I
+      redesigned how money moves through the consumer platform end to end, in support of
+      changing payment service regulations.
     </p>
-    <p class="dim">
-      I'm also an AI-native PM &mdash; I author shared GitHub Copilot skills my teammates use and
-      lean on agentic workflows to accelerate the highest-leverage product work.
+    <p>
+      Earlier at Microsoft I turned self-serve cancellation into a retention channel, lifted
+      signup conversion on Teams, and built event and notification systems still leveraged
+      across both the consumer and commercial platforms today. Before Microsoft, I gave a
+      health-tech startup its first product management function and took a clinical-research
+      platform from concept through launch.
     </p>
-    <p class="dim">
-      Recently impacted by the July 2026 Microsoft layoff and exploring what's next.
+    <p>
+      Now I build the AI tooling my teammates adopt into daily use &mdash; shared Copilot CLI
+      skills and agentic workflows that cut ~14 hours of recurring weekly work across my team.
     </p>
+    <p class="status">
+      Recently impacted by the
+      <a
+        href="https://news.xbox.com/en-us/2026/07/06/resetting-xbox/"
+        target="_blank"
+        rel="noopener"
+      >July 2026 Microsoft layoff</a>
+      and exploring what&rsquo;s next.
+    </p>
+
     <nav class="cta">
-      <a href="/about/">about &rarr;</a>
-      <a href="/projects/">projects &rarr;</a>
-      <a href="/writing/">writing &rarr;</a>
+      <a href="/about/">about</a>
+      <a href="/projects/">projects</a>
+      <a href="/writing/">writing</a>
     </nav>
   </section>
 </BaseLayout>
 
 <style>
   .hero {
-    padding-top: var(--space-lg);
+    padding-top: var(--space-xl);
+  }
+  .hero-top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+  .hero-id {
+    flex: 1;
+    min-width: 0;
+  }
+  .portrait {
+    flex-shrink: 0;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 15%;
+    border: 3px solid var(--accent);
+    box-shadow: 0 8px 36px var(--accent-glow);
+  }
+  .name {
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin: 0 0 var(--space-md);
+  }
+  .surname {
+    color: var(--accent);
+  }
+  .lede {
+    font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+    line-height: 1.35;
+    color: var(--text-primary);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--space-sm);
   }
   .tagline {
-    margin-top: -0.5rem;
-    margin-bottom: var(--space-lg);
-    color: var(--text-secondary);
-    font-size: 1.05rem;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+  }
+  /* Current-status note, set apart from the bio above it */
+  .status {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border);
+    color: var(--text-primary);
   }
   .cta {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-lg);
+    gap: var(--space-md);
     margin-top: var(--space-xl);
   }
   .cta a {
-    font-size: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+  .cta a:hover,
+  .cta a:focus-visible {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--bg-secondary);
+  }
+
+  @media (max-width: 640px) {
+    .hero-top {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      gap: var(--space-lg);
+    }
+    .portrait {
+      width: 140px;
+      height: 140px;
+    }
   }
 </style>

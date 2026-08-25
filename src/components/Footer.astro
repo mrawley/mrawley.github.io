@@ -1,16 +1,16 @@
 ---
 const email = 'meganmrawley@gmail.com';
 const github = 'https://github.com/mrawley';
-const linkedin = 'https://www.linkedin.com/in/megmarfraraw/';
+const linkedin = 'https://www.linkedin.com/in/meglange/';
 ---
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <p class="mono dim">$ get in touch</p>
+    <p class="footer-heading">Get in touch</p>
     <ul>
-      <li><a href={`mailto:${email}`}>{email}</a></li>
-      <li><a href={github} target="_blank" rel="noopener">github/mrawley</a></li>
-      <li><a href={linkedin} target="_blank" rel="noopener">linkedin</a></li>
+      <li><a class="email" href={`mailto:${email}`}>{email}</a></li>
+      <li><a href={linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href={github} target="_blank" rel="noopener">GitHub</a></li>
     </ul>
   </div>
 </footer>
@@ -25,19 +25,30 @@ const linkedin = 'https://www.linkedin.com/in/megmarfraraw/';
     max-width: var(--content-max);
     margin: 0 auto;
   }
+  .footer-heading {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin: 0;
+  }
   ul {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-lg);
     list-style: none;
-    margin: var(--space-sm) 0 0;
+    margin: var(--space-md) 0 0;
     padding: 0;
   }
   a {
     color: var(--text-secondary);
+    font-size: 0.95rem;
+    border-bottom: 1px solid transparent;
+  }
+  a.email {
     font-family: var(--font-mono);
     font-size: 0.9rem;
-    border-bottom: 1px solid transparent;
   }
   a:hover,
   a:focus-visible {

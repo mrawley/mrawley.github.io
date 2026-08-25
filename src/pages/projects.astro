@@ -7,8 +7,7 @@ const projects = (await getCollection('projects'))
 ---
 
 <BaseLayout title="Projects | Megan Lange">
-  <p class="eyebrow">Projects</p>
-  <h1>Projects</h1>
+  <h1 class="page-title">Projects</h1>
 
   {projects.length === 0 ? (
     <p class="dim">No projects published yet, check back soon.</p>
