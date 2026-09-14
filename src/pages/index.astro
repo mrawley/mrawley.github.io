@@ -45,14 +45,9 @@ import portrait from '../assets/megan.jpeg';
       Now I build the AI tooling my teammates adopt into daily use &mdash; shared Copilot CLI
       skills and agentic workflows that cut ~14 hours of recurring weekly work across my team.
     </p>
-    <p class="status">
-      Recently impacted by the
-      <a
-        href="https://news.xbox.com/en-us/2026/07/06/resetting-xbox/"
-        target="_blank"
-        rel="noopener"
-      >July 2026 Microsoft layoff</a>
-      and exploring what&rsquo;s next.
+    <p class="block-label">what I&rsquo;m drawn to</p>
+    <p class="blurb status">
+      Senior product roles where the problem is genuinely hard and the domain is new to me.
     </p>
 
     <nav class="cta">
@@ -111,12 +106,27 @@ import portrait from '../assets/megan.jpeg';
     letter-spacing: 0.04em;
     margin-bottom: 0;
   }
-  /* Current-status note, set apart from the bio above it */
+  .block-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin: var(--space-lg) 0 var(--space-xs);
+  }
+  .blurb {
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  /* Closing block, set apart from the blocks above it */
   .status {
-    margin-top: var(--space-xl);
-    padding-top: var(--space-lg);
+    padding-top: var(--space-md);
     border-top: 1px solid var(--border);
-    color: var(--text-primary);
+  }
+  .status + .cta {
+    margin-top: var(--space-lg);
   }
   .cta {
     display: flex;

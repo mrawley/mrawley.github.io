@@ -1,6 +1,7 @@
 ---
 title: "DatStat Connect"
 description: "Built DatStat Connect from concept through launch: a cloud platform for clinical-trial data collection and care-plan automation covering survey building, workflow design, patient tracking, scheduling, automated reminders, and data visualization. Significantly reduced setup time for both customers and the in-house services team. Used to run studies by the COPD Foundation, Group Health Cooperative, Seattle Children's Hospital, and the Ontario HIV Treatment Network."
+summary: "Built a clinical-research and care-plan platform from concept through launch, used to run studies by the COPD Foundation and Seattle Children's Hospital."
 year: "2014 - 2018"
 role: "Program Manager → Senior Program Manager"
 stack:
@@ -8,6 +9,7 @@ stack:
   - "Patient engagement"
   - "Workflow automation"
   - "0→1 product build"
+featured: false
 order: 7
 type: "work"
 ---

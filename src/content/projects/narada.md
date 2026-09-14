@@ -1,6 +1,7 @@
 ---
 title: "Commerce Eventing, Email & Notifications"
-description: "Built a subscription and purchase eventing solution designed to serve any downstream client, publishing events like renewals, payment failures, and auto-renew changes for clients to subscribe to as their use cases require — consolidating 3 concurrent workstreams across Windows Settings, subscription buddy passes, and consumer notification systems. Earlier, owned transactional email and notification infrastructure for commercial commerce: reduced the notification maintenance surface by 72% (57 legacy templates down to 16) migrating off Salesforce Marketing Cloud onto internal infrastructure across 5 partner organizations, cut emails sent to customers by 30%, and routed self-serve cancellers into a retention queue that retained 30% of the ~31K customers requesting cancellation monthly."
+description: "Built a subscription and purchase eventing solution designed to serve any downstream client, publishing events like renewals, payment failures, and auto-renew changes for clients to subscribe to as their use cases require, consolidating 3 concurrent workstreams across Windows Settings, subscription buddy passes, and consumer notification systems. Earlier, owned transactional email and notification infrastructure for commercial commerce: reduced the notification maintenance surface by 72% (57 legacy templates down to 16) migrating off Salesforce Marketing Cloud onto internal infrastructure across 5 partner organizations, cut emails sent to customers by 30%, and routed self-serve cancellers into a retention queue that retained 30% of the ~31K customers requesting cancellation monthly."
+summary: "Built the subscription and purchase eventing solution still serving downstream clients today, and cut the commercial notification maintenance surface by 72%."
 year: "2018 - 2026"
 role: "PM / Product Owner"
 stack:
@@ -9,12 +10,13 @@ stack:
   - "Consumer & commercial scale"
   - "Platform migration"
   - "Multi-storefront (Xbox, Store, Office, etc.)"
+featured: false
 order: 5
 type: "work"
 ---
 
 The starting scope of my Microsoft tenure, and an area I continued to hold ownership over as
-broader product responsibilities grew. The systems built here are still leveraged across both
+broader product responsibilities grew. The systems built here still run across both
 the consumer and commercial platforms today.
 
 Automating the save-desk retention solution also freed up engineering capacity. Separately,

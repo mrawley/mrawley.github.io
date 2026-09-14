@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('notes', ({ data }) => {
+  return !data.draft;
+});
+allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const email = 'meganmrawley@gmail.com';
+---
+
+<BaseLayout
+  title="Notes | Megan Lange"
+  description="Personal notes from Megan Lange on product work and what it has actually felt like."
+>
+  <h1 class="page-title">Notes</h1>
+
+  {
+    allPosts.length === 0 ? (
+      <div class="empty">
+        <p class="lede">
+          Notes rather than essays &mdash; shorter, less finished, and more personal than the
+          rest of this site. The other pages cover what I built. This is for the parts that
+          don&rsquo;t fit there: what the work actually felt like, what I learned the hard way,
+          and whatever I happen to be chewing on.
+        </p>
+
+        <p class="soon">Nothing here yet. Something will land before long.</p>
+
+        <p class="footnote">
+          In the meantime, the <a href="/projects/">projects</a> page covers the work itself,
+          and I&rsquo;m always up for a conversation &mdash;{' '}
+          <a href={`mailto:${email}`}>{email}</a>.
+        </p>
+      </div>
+    ) : (
+      <ul class="posts">
+        {allPosts.map((post) => (
+          <li>
+            <p class="meta mono dim">
+              {post.data.pubDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })}
+            </p>
+            <h3>
+              <a href={`/notes/${post.id}/`}>{post.data.title}</a>
+            </h3>
+            <p>{post.data.description}</p>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</BaseLayout>
+
+<style>
+  /* Empty state, shown until the first note is published */
+  .empty .lede {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--text-primary);
+    margin: calc(-1 * var(--space-md)) 0 var(--space-xl);
+  }
+  .empty .soon {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    border-left: 2px solid var(--accent);
+    padding-left: var(--space-md);
+    margin: 0 0 var(--space-xl);
+  }
+  .empty .footnote {
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+  }
+
+  /* Published note list */
+  .posts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .posts > li + li {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--border);
+  }
+  .meta {
+    margin: 0 0 0.25rem;
+    font-size: 0.85rem;
+  }
+  h3 {
+    margin-top: 0;
+  }
+</style>
