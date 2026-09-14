@@ -1,6 +1,7 @@
 ---
 title: "AI Tooling for Product Managers"
 description: "Reduced ~14 hours of recurring weekly work across a 7-person team by building AI tools the team adopted into daily use, including a co-developed project status-report generator and a set of Copilot CLI skills. Used agentic workflows to accelerate high-leverage product work like capability specs and gap analyses, and mentored teammates and leadership on AI adoption."
+summary: "Built AI tools my team adopted into daily use, cutting roughly 14 hours of recurring weekly work across a seven-person team."
 year: "2025 - 2026"
 role: "Author / PM"
 stack:
@@ -9,7 +10,7 @@ stack:
   - "Agentic workflow composition"
   - "Skill & design-pattern authorship"
   - "Prompt engineering"
-featured: true
+featured: false
 order: 6
 type: "work"
 ---

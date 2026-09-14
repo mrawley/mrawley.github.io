@@ -1,6 +1,7 @@
 ---
 title: "Payment Method Expansion & Continuity"
 description: "Managed change to 13 payment instruments across 11 storefronts through a China payment-provider transition, ensuring payment continuity for consumers with no interruption to purchase. Expanded and scoped new payment options for the platform including Alipay, Apple Pay, and Google Pay express checkout."
+summary: "Kept payments continuous through a China provider transition across 13 instruments and 11 storefronts, and scoped Alipay, Apple Pay, and Google Pay express checkout."
 year: "2024 - 2026"
 role: "PM"
 stack:
@@ -8,6 +9,7 @@ stack:
   - "Express checkout"
   - "International markets"
   - "Purchase & checkout flows"
+featured: false
 order: 4
 type: "work"
 ---

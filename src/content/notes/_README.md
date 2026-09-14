@@ -1,4 +1,4 @@
-# Content collection placeholder
+# Notes collection placeholder
 
 Markdown files in this folder become entries in the `writing` content collection.
 

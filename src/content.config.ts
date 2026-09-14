@@ -6,6 +6,8 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    // Short form used on the compact tiles; falls back to description.
+    summary: z.string().optional(),
     year: z.union([z.number(), z.string()]),
     role: z.string().optional(),
     stack: z.array(z.string()).default([]),
@@ -17,8 +19,8 @@ const projects = defineCollection({
   }),
 });
 
-const writing = defineCollection({
-  loader: glob({ pattern: '**/[!_]*.md', base: './src/content/writing' }),
+const notes = defineCollection({
+  loader: glob({ pattern: '**/[!_]*.md', base: './src/content/notes' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -30,4 +32,4 @@ const writing = defineCollection({
   }),
 });
 
-export const collections = { projects, writing };
+export const collections = { projects, notes };

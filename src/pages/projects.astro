@@ -2,37 +2,319 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const projects = (await getCollection('projects'))
-  .sort((a, b) => a.data.order - b.data.order);
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const featured = projects.filter((p) => p.data.featured);
+const rest = projects.filter((p) => !p.data.featured);
+
+// Public, customer-visible launches — the receipts behind the capabilities above.
+// `link` is optional: entries without one render as plain text. Add press/news URLs
+// as you have them rather than leaving an entry unlinked.
+const launches: { year: string; title: string; link?: string }[] = [
+  { year: '2026', title: 'Grand Theft Auto VI pre-order launch on Xbox, 20+ countries' },
+  { year: '2025', title: 'ROG Xbox Ally handheld: product bundling enabled at launch' },
+  { year: '2025', title: 'Xbox Game Pass tier and pricing restructure' },
+  { year: '2025', title: 'Multi-product device bundles across 3 regions and 18 OEM partners' },
+  { year: '2024', title: 'Express checkout: Alipay, Apple Pay, and Google Pay' },
+  { year: '2024', title: 'China payment-provider transition: 13 instruments, 11 storefronts' },
+];
+const VISIBLE_LAUNCHES = 3;
+const shownLaunches = launches.slice(0, VISIBLE_LAUNCHES);
+const hiddenLaunches = launches.slice(VISIBLE_LAUNCHES);
 ---
 
 <BaseLayout title="Projects | Megan Lange">
   <h1 class="page-title">Projects</h1>
+  <p class="lead">
+    Platform capabilities I owned end to end: what the problem was, what I built, and what
+    it moved.
+  </p>
 
-  {projects.length === 0 ? (
-    <p class="dim">No projects published yet, check back soon.</p>
-  ) : (
-    <ul class="bento">
-      {projects.map((p, i) => (
-        <li class={(i === 0 || i === projects.length - 1) && projects.length >= 4 ? 'wide' : ''}>
-          <div class="year mono">{p.data.year}</div>
-          <h3>{p.data.title}</h3>
-          {p.data.role && <span class="role">{p.data.role}</span>}
-          <p>{p.data.description}</p>
-          {p.data.stack && p.data.stack.length > 0 && (
-            <ul class="tags">
-              {p.data.stack.map((s) => <li>{s}</li>)}
-            </ul>
-          )}
-        </li>
-      ))}
+  {projects.length === 0 && <p class="dim">No projects published yet, check back soon.</p>}
+
+  {
+    featured.length > 0 && (
+      <section class="section">
+        <h2>Selected work</h2>
+        <p class="section-lede">The two I&rsquo;d want to talk through first.</p>
+        <ul class="featured">
+          {featured.map((p) => (
+            <li>
+              <div class="head">
+                <span class="year mono">{p.data.year}</span>
+                {p.data.role && <span class="role mono">{p.data.role}</span>}
+              </div>
+              <h3>{p.data.title}</h3>
+              <p>{p.data.description}</p>
+              {p.data.stack.length > 0 && (
+                <ul class="tags">
+                  {p.data.stack.map((s) => (
+                    <li>{s}</li>
+                  ))}
+                </ul>
+              )}
+              {(p.data.link || p.data.repo) && (
+                <div class="links">
+                  {p.data.link && (
+                    <a href={p.data.link} target="_blank" rel="noopener">
+                      Read more &rarr;
+                    </a>
+                  )}
+                  {p.data.repo && (
+                    <a href={p.data.repo} target="_blank" rel="noopener">
+                      Code &rarr;
+                    </a>
+                  )}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <section class="section">
+    <h2>Public launches</h2>
+    <p class="section-lede">Things that shipped to customers, most recent first.</p>
+    <ul class="launches">
+      {
+        shownLaunches.map((l) => (
+          <li>
+            <span class="launch-year mono">{l.year}</span>
+            {l.link ? (
+              <a class="launch-title" href={l.link} target="_blank" rel="noopener">
+                {l.title} &rarr;
+              </a>
+            ) : (
+              <span class="launch-title">{l.title}</span>
+            )}
+          </li>
+        ))
+      }
     </ul>
-  )}
+    {
+      hiddenLaunches.length > 0 && (
+        <details class="launches-more">
+          <summary>Show {hiddenLaunches.length} more launches</summary>
+          <ul class="launches">
+            {hiddenLaunches.map((l) => (
+              <li>
+                <span class="launch-year mono">{l.year}</span>
+                {l.link ? (
+                  <a class="launch-title" href={l.link} target="_blank" rel="noopener">
+                    {l.title} &rarr;
+                  </a>
+                ) : (
+                  <span class="launch-title">{l.title}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </details>
+      )
+    }
+  </section>
+
+  {
+    rest.length > 0 && (
+      <section class="section">
+        <h2>More work</h2>
+        <p class="section-lede">Platform and infrastructure work across commerce.</p>
+        <ul class="tiles">
+          {rest.map((p) => (
+            <li>
+              <span class="year mono">{p.data.year}</span>
+              <h3>{p.data.title}</h3>
+              <p>{p.data.summary ?? p.data.description}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
 </BaseLayout>
 
 <style>
-  /* Projects: variant J (bento asymmetric grid) */
-  .bento {
+  /* Page-level lede under the title */
+  .lead {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: calc(-1 * var(--space-md)) 0 0;
+  }
+  .section {
+    margin-top: var(--space-2xl);
+  }
+  /* One-line orientation under each section heading */
+  .section-lede {
+    color: var(--text-tertiary);
+    font-size: 0.92rem;
+    margin: calc(-1 * var(--space-sm)) 0 var(--space-lg);
+  }
+
+  /* Featured: full-width cards with an accent edge */
+  ul.featured {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-lg);
+  }
+  ul.featured > li {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  ul.featured > li:hover {
+    border-color: var(--border-strong);
+    border-left-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--accent-glow);
+  }
+  ul.featured .head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    align-items: baseline;
+    margin-bottom: 0.35rem;
+  }
+  ul.featured .year,
+  ul.featured .role {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+  }
+  ul.featured .role {
+    color: var(--text-tertiary);
+  }
+  ul.featured h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-sm);
+  }
+  ul.featured p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  ul.featured .tags {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-md) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  ul.featured .tags li {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    padding: 0.28rem 0.55rem;
+    line-height: 1;
+  }
+  /* Outbound affordances on a card */
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+  .links a {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+  }
+  .links a:hover,
+  .links a:focus-visible {
+    color: var(--accent-hover);
+  }
+
+  /* Public launches: year gutter + title, hairline separated */
+  ul.launches {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.launches > li {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: var(--space-md);
+    align-items: baseline;
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--border);
+  }
+  ul.launches > li:first-child {
+    border-top: 0;
+  }
+  .launch-year {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+  }
+  .launch-title {
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  a.launch-title {
+    color: var(--text-primary);
+  }
+  a.launch-title:hover,
+  a.launch-title:focus-visible {
+    color: var(--accent);
+  }
+
+  /* Native progressive disclosure, custom marker */
+  .launches-more > ul.launches > li:first-child {
+    border-top: 1px solid var(--border);
+  }
+  .launches-more summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+  }
+  .launches-more summary::-webkit-details-marker {
+    display: none;
+  }
+  .launches-more summary::before {
+    content: '+';
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    line-height: 0.9rem;
+    text-align: center;
+    border: 1px solid var(--border-strong);
+    border-radius: 3px;
+    transition: border-color 0.15s ease;
+  }
+  .launches-more[open] summary::before {
+    content: '\2212';
+  }
+  .launches-more summary:hover::before,
+  .launches-more summary:focus-visible::before {
+    border-color: var(--accent);
+  }
+  .launches-more[open] summary {
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Compact tiles */
+  ul.tiles {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -40,74 +322,53 @@ const projects = (await getCollection('projects'))
     grid-template-columns: 1fr 1fr;
     gap: var(--space-md);
   }
-  .bento > li {
+  ul.tiles > li {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: var(--space-lg);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    padding: var(--space-md);
+    transition: border-color 0.15s ease, transform 0.15s ease;
   }
-  .bento > li:hover {
+  ul.tiles > li:hover {
     border-color: var(--accent);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px var(--accent-glow);
   }
-  .bento > li.wide {
-    grid-column: 1 / -1;
-    border-left: 3px solid var(--accent);
-  }
-  .bento .year {
-    font-size: 0.75rem;
-    color: var(--accent);
-    letter-spacing: 0.05em;
+  ul.tiles .year {
+    font-size: 0.68rem;
     text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
   }
-  .bento h3 {
-    margin: 0;
+  ul.tiles h3 {
+    font-size: 1rem;
+    margin: 0.2rem 0 0.4rem;
     color: var(--text-primary);
-    font-size: 1.15rem;
   }
-  .bento h3::before {
-    content: '';
-  }
-  .bento .role {
-    font-family: var(--font-mono);
-    color: var(--accent);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  .bento p {
+  ul.tiles p {
     margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
     color: var(--text-secondary);
-    line-height: 1.6;
   }
-  .bento .tags {
-    list-style: none;
-    padding: 0;
-    margin: var(--space-sm) 0 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-  .bento .tags li {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--accent);
-    background: var(--accent-glow);
-    border-radius: 4px;
-    padding: 0.3rem 0.6rem;
-    line-height: 1;
-  }
+
   @media (max-width: 640px) {
-    .bento {
+    ul.tiles {
       grid-template-columns: 1fr;
     }
-    .bento > li.wide {
-      grid-column: 1;
+    ul.launches > li {
+      grid-template-columns: 3.5rem 1fr;
+      gap: var(--space-sm);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ul.featured > li,
+    ul.tiles > li {
+      transition: border-color 0.15s ease;
+    }
+    ul.featured > li:hover,
+    ul.tiles > li:hover {
+      transform: none;
     }
   }
 </style>
